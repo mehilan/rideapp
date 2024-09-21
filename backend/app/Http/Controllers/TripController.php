@@ -94,11 +94,15 @@ class TripController extends Controller
     {
         //  update the driver's current location
 
+        $request->validate([
+            'driver_location' => 'required'
+        ]);
+
         $trip->update([
             'driver_location' => $request->driver_location
         ]);
 
-        $trip->load('driver');
+        $trip->load('driver.user');
 
         return $trip;
     }
